@@ -1,0 +1,45 @@
+
+// // // // //
+// extend //
+// // // // //
+.p-content-section {
+  width: 100%;
+  height: fit-content;
+  @include bg-transparent;
+}
+.content-headline1 {
+  @include position ( relative, 0, null, 0, 50%);
+  @include centering-fix(-50%, 0);
+  width: fit-content;
+  margin: 0 auto 0;
+  text-align: center;
+  @include text-color($baseBlackColor);
+  overflow-x: hidden;
+
+  // mq //
+  @include sp {
+    @include font-size(20);
+    margin: 0 0 40px;
+  }
+  @include tb {
+    @include font-size(20);
+    margin: 0 0 40px;
+  }
+  @include pc1 {
+    @include font-size(22);
+    margin: 0 0 60px;
+  }
+  @include pc2 {
+    @include font-size(24);
+    margin: 0 0 80px;
+  }
+  @include up {
+    @include font-size(28);
+    margin: 0 0 80px;
+  }
+  // mq //
+}
+
+// // // // // //
+
+

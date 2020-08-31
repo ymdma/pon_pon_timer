@@ -1,0 +1,13 @@
+
+@mixin btn( $bg:$baseWhiteColor, $color:$subBlueColor ) {
+  height: 30px;
+  border: solid $subBlueColor 1px;
+  border-radius: 30px;
+  background: $bg;
+  color: $color;
+  &:hover{
+    border: solid $baseWhiteColor 1px;
+    color: $baseWhiteColor;
+    background: $subBlueColor;
+  }
+}

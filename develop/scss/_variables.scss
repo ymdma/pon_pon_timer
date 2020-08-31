@@ -1,0 +1,134 @@
+  // ***** RULES ***** //
+
+// font-size => 10px = 1rem
+// font-size : @include font-size(px) // auto conversion from px to rem.
+
+  // *****  ***  ***** //
+
+
+// // //
+// 色 //
+// // //
+
+//// gray scale
+  $baseWhiteColor   : #ffffff ; // pure white
+  $subWhiteColor    : #f5f5f5 ; //off white
+  $baseBlackColor   : #333333 ; // black
+  $baseGrayColor    : #707070 ; // gray
+  $subGrayColor     : #a2a9b1 ; // light gray
+//// color
+  // $baseRedColor     : red;
+  // $baseGreenColor   : green;
+  // $subBlueColor     : #0f4c81 ; // trend'20 blue 'ClassicBlue'
+  $subBlueColor    : #658dc6 ;// trend'20 blue 'Provence'
+  $baseBlueColor     : #1f518e ; // blue
+  $baseLightBlueColor    : #caedf2 ; // light blue
+  // $baseBlueColor    : #b6cada ;// trend'20 light blue 'BabyBlue'
+  $baseYellowColor  : #c6aa62 ; // yellow
+
+//// text-color
+  $baseTextColor    : #707070;
+  $linkTextColor    : $subBlueColor;
+  $visitedTextColor : #043067;
+  $borderColorGray  : $subGrayColor;
+
+// // // // /
+// // path //
+// // // // /
+
+// $root: "../";
+// $image: "images/";
+// $image_path: $root + $image;
+
+
+// // // // // /
+// Responsive //
+// // // // // /
+
+// font-size
+$baseFontSize: 10;
+$rootFontSize: percentage( $baseFontSize / 16 );
+
+//// for media-query
+// break point
+$sp  :  568px;
+$tb  :  768px;
+$pc1 : 1024px;
+$pc2 : 1280px;
+
+//// media-query mixins
+// スマホ
+@mixin sp {
+  @media (max-width: $sp - 1px) {
+    @content;
+  }
+}
+// タブレット 568-767
+@mixin tb {
+  @media (min-width: $sp) and (max-width: $tb - 1px) {
+    @content;
+  }
+}
+// パソコン(laptop) 768-1023
+@mixin pc1 {
+  @media (min-width: $tb) and (max-width: $pc1 - 1px) {
+    @content;
+  }
+}
+// パソコン(note〜desktop) 1024-1280
+@mixin pc2 {
+  @media (min-width: $pc1) and (max-width: $pc2 - 1px) {
+    @content;
+  }
+}
+// 1280以上(desktop)
+@mixin up {
+  @media (min-width: $pc2) {
+    @content;
+  }
+}
+
+
+// // // /
+// font //
+// // // /
+
+$sansSerif: "sans-serif";
+$hiragino:  "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Hiragino Sans", "ヒラギノ角ゴシック";
+
+
+// // // // //
+// @font-face
+
+// noto sans (第一までで軽量化)
+
+  /*medium*/
+@font-face {
+  font-family: 'NotoSansJP';
+  src: url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Regular.eot'); /* IE9 Compact Modes */
+  // src: url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Regular.woff') format('woff2'), /* Super Modern Browsers */
+  src: url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Regular.ttf')  format('truetype'); /* Safari, Android, iOS */
+  font-weight: 400;
+  font-style: Normal;
+}
+  /*BOld*/
+@font-face {
+  font-family: 'NotoSansJP';
+  src: url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Bold.eot'); /* IE9 Compact Modes */
+  // src: url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Bold.woff') format('woff2'), /* Super Modern Browsers */
+  src: url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Bold.ttf')  format('truetype'); /* Safari, Android, iOS */
+  font-weight: 700;
+  font-style: Bold;
+}
+  /*medium*/
+@font-face {
+  font-family: 'NotoSansJP';
+  src: url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Black.eot'); /* IE9 Compact Modes */
+  // src: url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Black.woff') format('woff2'), /* Super Modern Browsers */
+  src: url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Black.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../fonts/NotoSansCJKjp/NotoSansCJKjp-Black.ttf')  format('truetype'); /* Safari, Android, iOS */
+  font-weight: 900;
+  font-style: Black;
+}

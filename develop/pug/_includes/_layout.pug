@@ -1,0 +1,21 @@
+html(lang="ja")
+  head
+    include /_includes/_head.pug
+  body
+    .page-wrap
+      //- #alertIE.alertIE
+      .main
+        .upper-displays
+          //- .displays
+          .point-display(title="得点")
+            p#gamePoint 0
+            p /
+            input#maxPoint(type="text" value="10")
+          p#timer.timer-display(title="経過時間")
+            | 00:00
+        .lower-displays
+          button#startBtn.c-button__circle.start-btn START
+          button#stopBtn.c-button__circle.stop-btn STOP
+        #touchArea.touch-area
+          p#info タップ or クリック！
+          p#countDownDisplay.countDownDisplay

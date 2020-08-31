@@ -1,0 +1,222 @@
+
+// // Utility // //
+
+
+// // // // // //
+// クラス制御 //
+// // // // // //
+
+
+
+// *** is-active *** //
+
+// スクロール発火
+
+@keyframes underLineAnime {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@mixin gnavListAfter($name) {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 2px;
+  background: orange;
+  position: relative;
+  bottom: 0;
+  animation-name: $name;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}
+
+.is-active {
+  &::after {
+    @include gnavListAfter(underLineAnime);
+  }
+}
+
+// *** is-active *** //
+
+.is-hidden {
+  display: none !important;
+}
+
+// フェードイン(js+css)準備 //.in-viewの付与でフェードイン
+.inview {
+  opacity:1 !important;
+  transition: opacity ease-in 1000ms 30ms;
+  }
+
+// // // // // //
+
+
+
+
+// 表示しない ( display:none; )
+@mixin none {
+  display: none;
+}
+// @include none ;
+
+
+// ポジション指定をワンライナーに
+@mixin position (
+  $p: fixed,
+  $t: null, $r: null, $b: null, $l: null
+  ) {
+    position: $p;
+    top: $t;
+    right: $r;
+    bottom: $b;
+    left: $l;
+  }
+//   @include position($p: fixed, $t: , $l:);
+
+// w&h 100%
+@mixin full-size {
+  width: 100%;
+  height: 100%;
+}
+
+// w&h fit-content
+@mixin fit-content {
+  width: fit-content;
+  height: fit-content;
+}
+
+// 背景透過
+@mixin bg-transparent {
+  background: transparent;
+}
+
+// // border
+// @mixin border {
+//   border: solid $borderGray 1px;
+// }
+
+// // borderで下線
+// @mixin underLine {
+//   border-bottom: solid $borderColorGray 1px;
+// }
+
+
+// // // //
+//  文字
+
+// pxで書いてremに変換 (基準を自動判断)
+@mixin line-height($size) {
+  $bairitu: $baseFontSize / 16 ; // 基準のpx数が16の何倍か
+  line-height: ($size * $bairitu) + px ;
+  line-height: ($size / $baseFontSize) + rem;
+}
+
+// pxで書いてremに変換 (基準を自動判断)
+@mixin font-size($size) {
+  $bairitu: $baseFontSize / 16 ; // 基準のpx数が16の何倍か
+  font-size: ($size * $bairitu) + px ;
+  font-size: ($size / $baseFontSize) + rem;
+}
+
+// // font-size = line-height を同じ値でまとめて指定
+// @mixin text ($s) {
+//   @include line-height($s);
+//   @include font-size($s);
+// }
+
+
+// 文字色  ( color: $awesome ;)
+@mixin text-color($c: $baseTextColor){
+  color:$c;
+}
+// @include text-color;
+
+// フォント
+@mixin font-family ($ff) {
+  font-family: $ff;
+}
+// @include font-family($san-serif);
+// @include font-family($hiragino);
+
+
+// センタリング時の 自要素分の調整する (x,y)
+@mixin centering-fix (
+  $x: -50%, $y: -50%,
+  ) {
+  transform: translate($x, $y);
+}
+// @include centering-fix($x: , $y: )
+
+
+
+// // // //
+// 隣接指定 (px = 固定値)
+
+// 隣接横
+@mixin ppX ($n) {
+  p + p {
+  margin-left: $n + px;
+  }
+}
+@mixin llX ($n) {
+  li + li {
+  margin-left: $n + px;
+  }
+}
+// 隣接縦
+@mixin ppY($n) {
+  p + p {
+  margin-top: $n + px;
+  }
+}
+@mixin llY ($n) {
+  li + li {
+  margin-top: $n + px;
+  }
+}
+
+
+// // // //
+// flex-box
+
+// 横並びをセンター
+@mixin flex--j-c (
+  $text: center,
+  $jc: center
+) {
+  display: flex;
+  justify-content: $jc;
+  align-items: center;
+  text-align: $text;
+}
+// 横並びの上下間をセンタリング
+@mixin flex--a-i {
+  display: flex;
+  align-items: center;
+}
+
+// 縦横センタリング
+@mixin flex--column__center (
+  $text: center,
+  $jc: center
+) {
+  display: flex;
+  flex-direction: column;
+  justify-content: $jc;
+  align-items: center;
+  text-align: $text;
+}
+// // 2カラム
+// @mixin flex_TwoColumn () {
+//   display:flex;
+//   align-items: flex-start;
+// }
+
+
+// *** flex ***
+
