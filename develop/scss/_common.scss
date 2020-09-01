@@ -103,6 +103,7 @@
     .point-display p + p {
       padding-left: 5px;
       color:#000;
+      @include font-size(28);
       font-weight: 70
     }
     .point-display > input {
