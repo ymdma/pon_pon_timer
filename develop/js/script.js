@@ -2,10 +2,6 @@
 // **** Variables ****
 // *******************
 
-
-
-let conditionToGameClear = 10; // ゲームクリアになる正解数
-
 let Game = { point: 0 };
 let ms = 0;
 let sec = 0;
@@ -17,14 +13,16 @@ let gameState = 'stop';
 
 // カウントダウン
 let cdSec;
+let zero = 0;
+let full; // 総問題数
+let timeLimit;
 
-let zero = 0
-
-let full = 10
-let seikai = 'OK'
-let gameClear = '目標達成！'
+let seikai = 'OK';
+let gameClear = '達成！';
 
 let max;
+
+
 // *******************
 // **** Functions ****
 // *******************
@@ -32,9 +30,11 @@ let max;
 document.addEventListener('DOMContentLoaded', () => {
 
   max = document.getElementById('maxPoint').value;
+  timeLimit = document.getElementById('timeLimit').value;
 
   clickStartBtn();
-  changeMaxScore()
+  changeMaxScore();
+  changeTimeLimit();
 });
 
 
@@ -58,7 +58,7 @@ let amountToDeduct = -1;  // 減点量
 //  ポイントの足し引き
 //  calcPoint() >> 引数: amountToAdd or amountToDeduct
 const calcPoint = amount => {
-  Game.point += amount
+  Game.point += amount;
   pointDisplayUpdate();
 };
 
@@ -70,22 +70,31 @@ const pointDisplayUpdate = () => {
   gamePoint.innerHTML = Game.point;
 };
 
+// full 変更の反映
 const changeMaxScore = () => {
 
-  let maxInput = document.getElementById('maxPoint')
+  let maxInput = document.getElementById('maxPoint');
+
   maxInput.addEventListener('change',() =>{
     max = maxInput.value;
-    console.log(max)
+  })
+}
+// timeLimit 変更の反映
+const changeTimeLimit = () => {
+
+  let limitInput = document.getElementById('timeLimit');
+
+  limitInput.addEventListener('change',() =>{
+    timeLimit = limitInput.value;
   })
 }
 
 
 
 const changeState = (state) => {
-  gameState = state
+  gameState = state;
   changeDisplay();
   changeProgram();
-  console.log(gameState)
 };
 
 const changeDisplay = () => {
@@ -108,21 +117,22 @@ const changeProgram = () => {
       pushButton();
       break;
     case 'stop':
-      // clickStartBtn();
-      removeEL(document.getElementById('touchArea'), 'click', kaitou)
+      removeEL(document.getElementById('touchArea'), 'click', kaitou);
       break;
   }
 }
 
 // RemoveEventListner
 const removeEL = (target,event,name) => {
-  target.removeEventListener(event,name)
+  target.removeEventListener(event,name);
 }
 
 
 //スタートボタン押した時にカウント始める。
 const clickStartBtn = () => {
+
   const startBtn = document.getElementById('startBtn');
+
   startBtn.addEventListener('click', () => {
     min = 0;
     sec = 0;
@@ -131,18 +141,16 @@ const clickStartBtn = () => {
     changeState('run')
     setTimeout( () => { countStart() },100); // セッティング分のサービスカウント
 
-    document.getElementById('countDownDisplay').innerHTML = full
-    countDownStart()
+    document.getElementById('countDownDisplay').innerHTML = timeLimit;
+    countDownStart();
   })
 };
 
 // ストップウォッチスタート
 countStart = () =>  {
-  stopWatch = setInterval(countUp,10)
-
-  Game.point = zero
-  document.getElementById('gamePoint').innerHTML = zero
-
+  stopWatch = setInterval(countUp,10);
+  Game.point = zero;
+  document.getElementById('gamePoint').innerHTML = zero;
 };
 
 // カウントアップ処理
@@ -185,33 +193,32 @@ function kaitou () {
   const stopBtn = document.getElementById('stopBtn');
 
   isDisabled(stopBtn);
-  touchArea.style.pointerEvents = 'none'
+  touchArea.style.pointerEvents = 'none';
   clearInterval(countDownTimer);
   calcPoint(amountToAdd); // 加点
   countDownDisplay.innerHTML = seikai;
 
-
+  // 目標達成時
   if ( Game.point === Number(max) ) {
-    console.log(max)
-    console.log(Game.point)
     clearInterval(countDownTimer);
     clearInterval(stopWatch);
     countDownDisplay.innerHTML = gameClear;
     return
   }
 
+  // 正解したら少し間を取る
   setTimeout( () => {
     removeDisabled(stopBtn);
-    countDownDisplay.innerHTML = full;
+    countDownDisplay.innerHTML = timeLimit;
+    // console.log(timeLimit)
     touchArea.style.pointerEvents = 'auto'
-    // document.getElementById('info').innerHTML = ''
     countDownStart();
   }, 1000);  // 切り替え時間「OK」表示中
 }
 
 // カウントダウンスタート
 countDownStart = () =>  {
-  cdSec = full;
+  cdSec = Number(timeLimit);
   countDownTimer = setInterval(countDown,1000)
 };
 
@@ -249,7 +256,7 @@ Promise.resolve()
 return new Promise( resolve => {
 target.animate( {
 // background: ['#ffd45e', '#ffd45e'],
-fontSize: ['80px', '120px'],
+fontSize: ['120px', '80px'],
 opacity: ['1', '0.6', '1']
 }
 , {

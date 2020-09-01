@@ -3,10 +3,11 @@ html(lang="ja")
     include /_includes/_head.pug
   body
     .page-wrap
-      //- #alertIE.alertIE
       .main
+        .limit-display
+          p TimeLimit
+          input.time-limit#timeLimit(type="text" value="10")
         .upper-displays
-          //- .displays
           .point-display(title="得点")
             p#gamePoint 0
             p /
